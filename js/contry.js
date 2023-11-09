@@ -1,26 +1,40 @@
+// extrar de Local Storage los paises y su codigo alfa
 alpha3CodeStr = JSON.parse(localStorage.getItem('alpha3CodeArray'));
 
 const informationSection = document.getElementById('information');
 const backBtn = document.getElementById('back__btn');
 
+// al hacer click en boton "back" se regresa al menu principal
 backBtn.addEventListener('click', () => {
   window.location.href = '../index.html';
 })
 
+// cuando cargue el documento buscara en el URL los parametros
 document.addEventListener('DOMContentLoaded', obtainIdParam);
+// document.addEventListener('DOMContentLoaded', () => {
+//   const bodyDOM = document.querySelector('body');
+//   if (bodyDOM.classList.contains('dark')) {
+//     bodyDOM.classList.remove('dark');
+//     darkModeIcon.classList.add('fa-regular');
+//     darkModeIcon.classList.remove('fa-solid');
+//   } else {
+//     bodyDOM.classList.add('dark');
+//     darkModeIcon.classList.remove('fa-regular');
+//     darkModeIcon.classList.add('fa-solid');
+//   }
+// });
 
 function obtainIdParam() {
   const URLParams = new URLSearchParams(window.location.search);
 
   const idContry = URLParams.get('id');
   const codeContry = URLParams.get('code');
-  // console.log(idContry);
-  // console.log(codeContry);
 
-
+  // si tiene id entonces busca en "data.json" por ID
   if (idContry && codeContry === null) {
     fetchDetailsByID(idContry);
   } else {
+    // busca por codigo alfa
     fetchDetailsByCode(codeContry);
   }
 }
@@ -47,19 +61,22 @@ async function fetchDetailsByCode(codeContry) {
   }
 }
 
+// identifica el pais por el parametro de ID
 function identifyContryByID(contries, idContry) {
   const foundContry = contries.filter(contry => contry.numericCode == idContry);
   renderContryDetails(foundContry);
 }
 
+// identifica el pais por el parametro de codigo alfa
 function identifyContryByCode(contries, codeContry) {
   const foundContry = contries.filter(contry => contry.alpha3Code == codeContry);
   renderContryDetails(foundContry);
 }
 
+// muestra en el HTML los detalles del pais
 function renderContryDetails(foundContry) {
   // destructuring
-  const { flags, name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borders  } = foundContry[0];
+  const { flags, name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borders } = foundContry[0];
 
   // META TAG TITLE
   const titleTag = document.getElementsByTagName('title');
@@ -161,16 +178,23 @@ function renderContryDetails(foundContry) {
   borderContriesDiv.classList.add('border__contries');
 
   // boder contries NAME
-  borders.forEach(bord => {
-    const borderStr = alpha3CodeStr.find(contry => contry.alpha3Code === bord);
-    let borderName = borderStr.name;
+  if (borders === undefined) {
     const borderContriesA = document.createElement('a');
-    borderContriesA.href = `./contry.html?code=${bord}`;
-    borderContriesA.target = '_blank';
-    borderContriesA.innerText = borderName;
+    borderContriesA.href = `#`;
+    borderContriesA.innerText = 'None';
     borderContriesDiv.appendChild(borderContriesA);
-  });
-
+  } else {
+    borders.forEach(bord => {
+      const borderStr = alpha3CodeStr.find(contry => contry.alpha3Code === bord);
+      let borderName = borderStr.name;
+      const borderContriesA = document.createElement('a');
+      borderContriesA.href = `./contry.html?code=${bord}`;
+      borderContriesA.target = '_blank';
+      borderContriesA.innerText = borderName;
+      borderContriesDiv.appendChild(borderContriesA);
+    });
+  }
+  
   informationBorderDiv.appendChild(borderContriesP);
   informationBorderDiv.appendChild(borderContriesDiv);
 

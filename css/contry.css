@@ -64,6 +64,7 @@ body.dark .back__btn i {
   aspect-ratio: 3/2;
   height: 100%;
   object-fit: cover;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .information__texts {
