@@ -34,9 +34,9 @@ let regions = [];
 function showData(contries) {
   contries.forEach(contry => {
     regions.push(contry.region);
-    const { name, population, region, capital, numericCode } = contry;
+    const { name, population, region, capital, numericCode, flags } = contry;
     const cardA = document.createElement('a');
-    cardA.href = `./contry.html?${numericCode}`;
+    cardA.href = `./contry.html?id=${numericCode}`;
     cardA.target = '_blank';
     cardA.classList.add('contry__card');
 
@@ -48,7 +48,7 @@ function showData(contries) {
     const cardImg = document.createElement('img');
     cardImg.classList.add('card__img');
     cardImg.loading = 'lazy';
-    cardImg.src = contry.flags.png;
+    cardImg.src = flags.png;
     cardImg.alt = name;
     
     cardPicture.appendChild(cardImg);
