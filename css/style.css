@@ -1,29 +1,36 @@
 :root {
   /* Dark Mode Elements */
-  --dark-blue: hsl(209, 23%, 22%);
+  --dark-blue-el-el: hsl(209, 23%, 22%);
   /* Dark Mode Background */
-  --very-dark-blue: hsl(207, 26%, 17%);
+  --very-dark-blue-el-bg: hsl(207, 26%, 17%);
   /* Light Mode Text */
-  --very-dark-blue: hsl(200, 15%, 8%);
+  --very-dark-blue-el-txt: hsl(200, 15%, 8%);
   /* Light Mode Input */
-  --dark-gray: hsl(0, 0%, 52%);
+  --dark-gray-input: hsl(0, 0%, 52%);
   /* Light Mode Background */
-  --very-light-gray: hsl(0, 0%, 98%);
+  --very-light-gray-bg: hsl(0, 0%, 98%);
   /* Dark Mode Text & Light Mode Elements */
   --white: hsl(0, 0%, 100%);
 }
 
 body {
   font-family: 'Nunito Sans', sans-serif;
-  background-color: var(--very-light-gray);
+  background-color: var(--very-light-gray-bg);
   font-size: 14px;
+}
+body.dark {
+  background-color: var(--very-dark-blue-el-bg);
 }
 
 /* HEADER */
 
 .header {
-  background-color: var(--very-light-gray);
-  border-bottom: 2px solid black;
+  background-color: var(--very-light-gray-bg);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+body.dark .header {
+  background-color: var(--dark-blue-el-el);
+  color: var(--white);
 }
 
 .top__nav {
@@ -44,15 +51,30 @@ body {
 .nav__btn {
   border: none;
   background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 600;
+}
+.nav__btn i {
+  font-size: 20px;
+}
+body.dark .nav__btn,
+body.dark .nav__btn i {
+  color: var(--white);
 }
 
 /* MAIN */
 
 .main {
-  background-color: var(--very-light-gray);
+  background-color: var(--very-light-gray-bg);
   width: 90%;
   max-width: 1300px;
   margin: 2.5rem auto;
+}
+body.dark .main {
+  background-color: var(--very-dark-blue-el-bg);
 }
 
 /* SECTION: INPUTS */
@@ -61,51 +83,125 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   margin-bottom: 2.5rem;
+  flex-wrap: wrap;
 }
 
+/* SEARCH INPUT */
+
 .search__group {
-  border: 1px solid black;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 5px;
+  padding-left: 2rem;
+  background-color: var(--white);
 }
 .search__group input {
-  width: 100%;
+  width: 450px;
+  max-width: 100%;
   position: relative;
   height: 50px;
   line-height: 50px;
-  padding-left: 2rem;
+  padding-left: 2.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--white);
+  color: var(--dark-gray-input);
+  outline: none;
 }
 .search__group i {
   position: absolute;
   z-index: 2;
   line-height: 50px;
   font-size: 18px;
+  color: var(--dark-gray-input);
+}
+body.dark .search__group,
+body.dark .search__group input,
+body.dark .search__group i {
+  background-color: var(--dark-blue-el-el);
+  color: var(--white);
 }
 
 .input__group input,
 .input__group select {
-  background-color: var(--very-light-gray);
   border: none;
   outline: none;
 }
 
-/* SEARCH INPUT */
-.input__group:nth-child(1) {
-  justify-content: start;
-  gap: 2rem;
-  width: 450px;
-  padding: 0 2rem;
+/* FILTER REGION INPUT */
+
+.region__group {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  background-color: var(--white);
+  padding: 0 1rem;
+}
+body.dark .region__group,
+body.dark .region__group select {
+  background-color: var(--dark-blue-el-el);
+  color: var(--white);
+}
+
+.region__group select {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  padding-right: 2rem;
   height: 50px;
   line-height: 50px;
+  cursor: pointer;
 }
 
+/* SECTION: CONTRIES */
 
-/* FILTER REGION INPUT */
-/* .input__group select {
-  -webkit-appearance: none;
+.contries {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4rem;
 }
 
-.input__group:nth-child(2) {
-  justify-content: space-between;
-  gap: 2rem;
-} */
+.contry__card {
+  background-color: var(--white);
+  text-decoration: none;
+  color: black;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 160px 1fr;
+}
+body.dark .contry__card {
+  background-color: var(--dark-blue-el-el);
+  color: var(--white);
+}
+
+.card__picture {
+  width: 100%;
+  height: 100%;
+}
+
+.card__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+
+.contry__info {
+  padding: 1.5rem 1.5rem 2rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.contry__title {
+  margin-bottom: 1rem;
+}
+
+.contry__info p {
+  font-weight: 600;
+}
+.contry__info span {
+  font-weight: 300;
+}
