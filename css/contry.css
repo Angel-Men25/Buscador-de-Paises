@@ -16,6 +16,9 @@
 body {
   font-size: 16px;
 }
+body.dark {
+  color: var(--white);
+}
 
 /* SECTION: BACK */
 
@@ -35,6 +38,11 @@ body {
 .back__btn i {
   margin-right: 10px;
 }
+body.dark .back__btn,
+body.dark .back__btn i {
+  background-color: var(--dark-blue-el-el);
+  color: var(--white);
+}
 
 /* SECTION: INFORMATION */
 
@@ -46,7 +54,8 @@ body {
 
 .information__picture {
   width: 100%;
-  height: 100%;
+  height: 360px;
+  max-height: 360px;
 }
 
 .information__img {
@@ -78,9 +87,20 @@ body {
 
 .information__border {
   display: flex;
+  align-items: center;
   gap: 2rem;
   color: var(--very-dark-blue-el-txt);
   font-weight: 600;
+}
+body.dark .information__border,
+body.dark .information__border a {
+  color: var(--white);
+}
+
+.border__contries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .border__contries a {
@@ -89,5 +109,4 @@ body {
   text-decoration: none;
   padding: 8px 20px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  margin-right: 14px;
 }

@@ -1,41 +1,65 @@
+alpha3CodeStr = JSON.parse(localStorage.getItem('alpha3CodeArray'));
+
 const informationSection = document.getElementById('information');
+const backBtn = document.getElementById('back__btn');
+
+backBtn.addEventListener('click', () => {
+  window.location.href = '../index.html';
+})
 
 document.addEventListener('DOMContentLoaded', obtainIdParam);
 
 function obtainIdParam() {
   const URLParams = new URLSearchParams(window.location.search);
+
   const idContry = URLParams.get('id');
-  fetchDetailsContry(idContry);
+  const codeContry = URLParams.get('code');
+  // console.log(idContry);
+  // console.log(codeContry);
+
+
+  if (idContry && codeContry === null) {
+    fetchDetailsByID(idContry);
+  } else {
+    fetchDetailsByCode(codeContry);
+  }
 }
 
-async function fetchDetailsContry(idContry) {
+async function fetchDetailsByID(idContry) {
   try {
     const url = '../data.json';
     const response = await fetch(url);
     const data = await response.json();
-    identifyContry(data, idContry);
+    identifyContryByID(data, idContry);
   } catch (error) {
     console.log(error);
   }
 }
 
-function identifyContry(contries, idContry) {
+async function fetchDetailsByCode(codeContry) {
+  try {
+    const url = '../data.json';
+    const response = await fetch(url);
+    const data = await response.json();
+    identifyContryByCode(data, codeContry);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function identifyContryByID(contries, idContry) {
   const foundContry = contries.filter(contry => contry.numericCode == idContry);
+  renderContryDetails(foundContry);
+}
+
+function identifyContryByCode(contries, codeContry) {
+  const foundContry = contries.filter(contry => contry.alpha3Code == codeContry);
+  renderContryDetails(foundContry);
+}
+
+function renderContryDetails(foundContry) {
   // destructuring
   const { flags, name, nativeName, population, region, subregion, capital, topLevelDomain, currencies, languages, borders  } = foundContry[0];
-  // flags.svg
-  // topLevelDomain[0]
-  // currencies[0].name
-  // languages
-  //    let languagesArray = [];
-  //    languages.forEach(lang => {
-  //      languagesArray.push(lang.name);
-  //    });
-  //    console.log(languagesArray.join(', '));
-  // borders
-  // borders.forEach(bord => {
-  //   console.log(bord);
-  // });
 
   // META TAG TITLE
   const titleTag = document.getElementsByTagName('title');
@@ -135,10 +159,17 @@ function identifyContry(contries, idContry) {
   // border__contries DIV
   const borderContriesDiv = document.createElement('div');
   borderContriesDiv.classList.add('border__contries');
-  // borders.forEach(bord => {
-  //   console.log(bord);
-  //   const borderA = document.createElement()
-  // });
+
+  // boder contries NAME
+  borders.forEach(bord => {
+    const borderStr = alpha3CodeStr.find(contry => contry.alpha3Code === bord);
+    let borderName = borderStr.name;
+    const borderContriesA = document.createElement('a');
+    borderContriesA.href = `./contry.html?code=${bord}`;
+    borderContriesA.target = '_blank';
+    borderContriesA.innerText = borderName;
+    borderContriesDiv.appendChild(borderContriesA);
+  });
 
   informationBorderDiv.appendChild(borderContriesP);
   informationBorderDiv.appendChild(borderContriesDiv);

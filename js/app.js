@@ -1,19 +1,13 @@
 const contriesContainer = document.getElementById('contries');
 const regionSelect = document.getElementById('region');
-const darkModeBtn = document.getElementById('darkModeBtn');
-const darkModeIcon = document.querySelector('#darkModeBtn i');
-const bodyDOM = document.querySelector('body');
 
-darkModeBtn.addEventListener('click', () => {
-  if (bodyDOM.classList.contains('dark')) {
-    bodyDOM.classList.remove('dark');
-    darkModeIcon.classList.add('fa-regular');
-    darkModeIcon.classList.remove('fa-solid');
-  } else {
-    bodyDOM.classList.add('dark');
-    darkModeIcon.classList.remove('fa-regular');
-    darkModeIcon.classList.add('fa-solid');
-  }
+// Contry Input
+const contryInput = document.getElementById('contry');
+
+contryInput.addEventListener('keyup', (e) => {
+  let contryName = e.target.value;
+  console.log(contryName);
+  // fetchByName(contryName);
 })
 
 document.addEventListener('DOMContentLoaded', app);
@@ -29,12 +23,27 @@ async function app() {
   }
 }
 
-let regions = [];
+async function fetchByName(contryName) {
+  try {
+    const url = '../data.json';
+    const response = await fetch(url);
+    const data = await response.json();
+    showData(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+let alpha3CodeStr = [];
 
 function showData(contries) {
   contries.forEach(contry => {
     regions.push(contry.region);
-    const { name, population, region, capital, numericCode, flags } = contry;
+    const { name, population, region, capital, numericCode, flags, alpha3Code } = contry;
+
+    alpha3CodeStr.push({name: name, alpha3Code: alpha3Code});
+
+    // card a
     const cardA = document.createElement('a');
     cardA.href = `./contry.html?id=${numericCode}`;
     cardA.target = '_blank';
@@ -85,7 +94,10 @@ function showData(contries) {
 
   const regionsSet = new Set(regions);
   fillRegionsSelect(regionsSet);
+  localStorage.setItem('alpha3CodeArray', JSON.stringify(alpha3CodeStr));
 }
+
+let regions = [];
 
 function fillRegionsSelect(regionsSet) {
   regionsSet.forEach(region => {
