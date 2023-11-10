@@ -68,7 +68,8 @@ body.dark .back__btn i {
 }
 
 .information__texts {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 }
 
 .information__details {
@@ -76,6 +77,13 @@ body.dark .back__btn i {
   gap: 4rem;
 }
 
+
+.details {
+  display: grid;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  align-content: start;
+}
 .details p {
   font-weight: 600;
   margin-bottom: 12px;

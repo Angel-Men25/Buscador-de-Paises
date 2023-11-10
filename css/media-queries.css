@@ -1,0 +1,123 @@
+:root {
+  /* Dark Mode Elements */
+  --dark-blue-el-el: hsl(209, 23%, 22%);
+  /* Dark Mode Background */
+  --very-dark-blue-el-bg: hsl(207, 26%, 17%);
+  /* Light Mode Text */
+  --very-dark-blue-el-txt: hsl(200, 15%, 8%);
+  /* Light Mode Input */
+  --dark-gray-input: hsl(0, 0%, 52%);
+  /* Light Mode Background */
+  --very-light-gray-bg: hsl(0, 0%, 98%);
+  /* Dark Mode Text & Light Mode Elements */
+  --white: hsl(0, 0%, 100%);
+}
+
+@media screen and (max-width: 1300px) {
+  .contries {
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 871px) {
+  .contry__card {
+    grid-template-rows: 240px 1fr;
+  }
+}
+
+@media screen and (max-width: 790px) {
+  .contry__card {
+    grid-template-rows: 200px 1fr;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .contry__card {
+    grid-template-rows: 170px 1fr;
+  }
+}
+
+@media screen and (max-width: 574px) {
+  .inputs {
+    flex-direction: column;
+    align-items: start;
+  }
+  /* SEARCH INPUT */
+  .search__group {
+    width: 100%;
+  }
+  /* SECTION: CONTRIES */
+  .contries {
+    grid-template-columns: 1fr 1fr;
+  }
+  .contry__card {
+    grid-template-rows: 150px 1fr;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .nav__title {
+    font-size: 1.2rem;
+  }
+  .nav__btn {
+    font-size: 14px;
+  }
+  .nav__btn i {
+    font-size: 16px;
+  }
+  /* SECTION: CONTRIES */
+  .contries {
+    grid-template-columns: 280px;
+    justify-content: center;
+  }
+  .contry__card {
+    grid-template-rows: 180px 1fr;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .nav__title {
+    font-size: 1rem;
+  }
+}
+
+/* contry.html */
+
+@media screen and (max-width: 1250px) {
+  .information__border {
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 1110px) {
+  .information__picture {
+    height: 300px;
+    max-height: 360px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .information {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .information__picture {
+    height: 300px;
+  }
+  .information__texts {
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .information__picture {
+    height: 280px;
+  }
+  .information__details {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

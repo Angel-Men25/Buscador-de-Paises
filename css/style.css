@@ -71,7 +71,7 @@ body.dark .nav__btn i {
   background-color: var(--very-light-gray-bg);
   width: 90%;
   max-width: 1300px;
-  margin: 2.5rem auto;
+  margin: 2.5rem auto 4rem;
 }
 body.dark .main {
   background-color: var(--very-dark-blue-el-bg);
@@ -159,6 +159,7 @@ body.dark .region__group select {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 4rem;
 }
 
