@@ -128,7 +128,7 @@ function renderContryDetails(foundContry) {
   nativeNameP.innerHTML = `<p>Native Name: <span>${nativeName}</span></p>`;
   // population
   const populationP = document.createElement('p');
-  populationP.innerHTML = `<p>Population: <span>${population}</span></p>`;
+  populationP.innerHTML = `<p>Population: <span>${separator(population)}</span></p>`;
   // regions
   const regionsP = document.createElement('p');
   regionsP.innerHTML = `<p>Region: <span>${region}</span></p>`;
@@ -201,4 +201,11 @@ function renderContryDetails(foundContry) {
 
   informationSection.appendChild(informationPictureDiv);
   informationSection.appendChild(informationTextsDiv);
+}
+
+// funcion que separa por comas cada 3 digitos
+function separator(number) {
+  let separateNumber = number.toString().split('.');
+  separateNumber[0] = separateNumber[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return separateNumber.join('.');
 }

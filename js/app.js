@@ -129,7 +129,7 @@ function renderContryByName(foundContry) {
 
   // Population
   const infoPopulation = document.createElement('p');
-  infoPopulation.innerHTML = `Population: <span>${population}</span>`;
+  infoPopulation.innerHTML = `Population: <span>${separator(population)}</span>`;
   // Region
   const infoRegion = document.createElement('p');
   infoRegion.innerHTML = `Region: <span>${region}</span>`;
@@ -218,7 +218,7 @@ function renderContryCards(contry) {
 
   // Population
   const infoPopulation = document.createElement('p');
-  infoPopulation.innerHTML = `Population: <span>${population}</span>`;
+  infoPopulation.innerHTML = `Population: <span>${separator(population)}</span>`;
   // Region
   const infoRegion = document.createElement('p');
   infoRegion.innerHTML = `Region: <span>${region}</span>`;
@@ -235,6 +235,13 @@ function renderContryCards(contry) {
   cardA.appendChild(infoDiv);
 
   contriesContainer.appendChild(cardA);
+}
+
+// funcion que separa por comas cada 3 digitos
+function separator(number) {
+  let separateNumber = number.toString().split('.');
+  separateNumber[0] = separateNumber[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return separateNumber.join('.');
 }
 
 function cleanHTML(section) {
